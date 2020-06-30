@@ -3,21 +3,16 @@ Resource          ../../../../Resources/Business/attendance.robot
 Library           verification_library
 
 *** Test Cases ***
-test
-    ${resp}    Calculate Sign
-    log    ${resp}
-    log    ${resp}[-1]
-
 Class_01_app鉴权
     [Setup]
-    [Template]    app_auth_Post
-    15676497800668552d    E1B559D014E90F7EF8047949A7440F3E
+    [Template]    app_auth_assertClass
+    ${SCHOOL_ID}    ${SCHOOL_KEY}
 
 *** Keywords ***
 app_auth_Post
     [Arguments]    ${app_id}    ${app_key}    ${timestamp}=None    ${sign}=None
-    [Documentation]    app鉴权：获取token
-    ...    app_id: \ 项目id
+    [Documentation]    app鉴权：校验接口服务的连通性
+    ...    app_id: 项目id
     ...    app_key: 项目的密钥
     ...    timestamp：时间戳
     ...    sign：加密签名
@@ -30,6 +25,36 @@ app_auth_Post
     Set To Dictionary    ${datas}    timestamp=${timestamp}
     Set To Dictionary    ${datas}    sign=${sign}
     Log    ${datas}
-    ${resp}    request_post    ${url}    ${attendanceApi}[appAuth]    json=${datas}
-    #将响应数据从字符串转成python字典对象
-    Should Be True    ${resp.json()}[code]==1
+    ${resp}    request_post    ${URL}    ${AUTH}    json=${datas}
+    Should Be True    ${resp.status_code}==200
+    [Return]    ${resp.json()}    # 返回json结果
+
+app_auth_assertClass
+    [Arguments]    ${app_id}    ${app_key}    ${timestamp}=None    ${sign}=None
+    [Documentation]    app鉴权：校验正常场景的业务逻辑
+    ...    app_id: 项目id
+    ...    app_key: 项目的密钥
+    ...    timestamp：时间戳
+    ...    sign：加密签名
+    ${resp}    app_auth_Post    ${app_id}    ${app_key}    timestamp=${timestamp}    sign=${sign}
+    Should Be True    ${resp}[code]==1
+
+app_auth_assertException
+    [Arguments]    ${app_id}    ${app_key}    ${timestamp}=None    ${sign}=None
+    [Documentation]    app鉴权：校验异常场景的业务逻辑
+    ...    app_id: 项目id
+    ...    app_key: 项目的密钥
+    ...    timestamp：时间戳
+    ...    sign：加密签名
+    ${resp}    app_auth_Post    ${app_id}    ${app_key}    timestamp=${timestamp}    sign=${sign}
+    Should Be True    ${resp}[code]==-1
+
+app_auth_assertDataVerify
+    [Arguments]    ${app_id}    ${app_key}    ${timestamp}=None    ${sign}=None
+    [Documentation]    app鉴权：校验接口业务返回数据是否正确
+    ...    app_id: 项目id
+    ...    app_key: 项目的密钥
+    ...    timestamp：时间戳
+    ...    sign：加密签名
+    ${resp}    app_auth_Post    ${app_id}    ${app_key}    timestamp=${timestamp}    sign=${sign}
+    Should Be True    ${resp}[code]==-1

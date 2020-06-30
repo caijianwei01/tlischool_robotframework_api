@@ -1,9 +1,8 @@
 *** Settings ***
 Resource          ../Public/http_request.robot
+Variables         ../Lib/Attendance/config.py
 
 *** Variables ***
-${url}            http://attendance.yooticloud.cn/api/v1
-&{attendanceApi}    appAuth=/app/auth
 
 *** Keywords ***
 request_get
