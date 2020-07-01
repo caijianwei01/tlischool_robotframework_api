@@ -1,12 +1,15 @@
 *** Settings ***
 Resource          ../../../../Resources/Business/attendance.robot
-Library           verification_library
 
 *** Test Cases ***
 Class_01_app鉴权
     [Setup]
     [Template]    app_auth_assertClass
     ${SCHOOL_ID}    ${SCHOOL_KEY}
+
+test
+    ${idcard}    Create Id Card    10
+    log    ${idcard}
 
 *** Keywords ***
 app_auth_Post

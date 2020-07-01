@@ -74,7 +74,9 @@ class MyUtils(object):
         :return:
         """
         code_list = []
-        with open('data/districtcode.txt', encoding='utf-8') as f:
+        # 需要获取 districtcode.txt 文件的绝对路径
+        file_path = os.path.dirname(os.path.abspath(__file__)) + "\data\districtcode.txt"
+        with open(file_path, encoding='utf-8') as f:
             lines = f.readlines()
         for line in lines:
             # 获取辖区的区号

@@ -6,7 +6,7 @@ import pymysql
 class MysqlUtil(object):
     """mysql连接数据库操作"""
 
-    def __init__(self, host, port, user, passwd, db):
+    def __init__(self, host='127.0.0.1', port=3306, user='root', passwd='123456', db='school'):
         self.conn = pymysql.connect(host=host,
                                     port=port,
                                     user=user,
@@ -45,7 +45,7 @@ class MysqlUtil(object):
 
 
 if __name__ == '__main__':
-    db = MysqlUtil('127.0.0.1', 3306, 'root', '123456', 'school')
+    db = MysqlUtil()
     sql1 = "select USER_NAME, GUID from school_student where SCHOOL_ID='c42be09025eb851943bf77378b034d62' and AUTH_PIC_URL is not null limit 10;"
     rs1 = db.query(sql1)
     guids = []
