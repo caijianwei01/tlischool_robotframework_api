@@ -1,6 +1,6 @@
 *** Settings ***
 Resource          ../Public/http_request.robot
-Variables         ../Lib/Attendance/config.py
+Variables         ../Lib/attendance/config.py
 
 *** Variables ***
 
