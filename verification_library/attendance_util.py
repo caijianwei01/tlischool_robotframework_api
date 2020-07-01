@@ -12,7 +12,7 @@ class AttendanceUtil(object):
         获取md5加密签名
         :return: 返回签名
         """
-        timestamp = AttendanceUtil.get_timestamp()
+        timestamp = self.get_timestamp()
         app_secret, app_key = "47F9B660196F0F23B55908786E8A327B", "E1B559D014E90F7EF8047949A7440F3E"
         md5_val = hashlib.md5((app_key + timestamp + app_secret).lower().encode("utf-8")).hexdigest()
         return md5_val, timestamp
@@ -31,7 +31,6 @@ class AttendanceUtil(object):
             'timestamp': self.get_timestamp(),
             'sign': self.calculate_sign()
         }
-        # rs = requests.post(url, data=json.dumps(data))
         rs = requests.post(url, json=data)
         return rs.json()['data']
 

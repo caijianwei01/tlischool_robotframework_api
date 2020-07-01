@@ -3,6 +3,7 @@ Resource          ../../../../Resources/Business/attendance.robot
 
 *** Test Cases ***
 Class_01_app鉴权
+    [Tags]    true
     [Setup]
     [Template]    app_auth_assertClass
     ${SCHOOL_ID}    ${SCHOOL_KEY}
@@ -43,14 +44,16 @@ app_auth_assertClass
     Should Be True    ${resp}[code]==1
 
 app_auth_assertException
-    [Arguments]    ${app_id}    ${app_key}    ${timestamp}=None    ${sign}=None
+    [Arguments]    ${app_id}    ${app_key}    ${error_msg}    ${timestamp}=None    ${sign}=None
     [Documentation]    app鉴权：校验异常场景的业务逻辑
     ...    app_id: 项目id
     ...    app_key: 项目的密钥
+    ...    error_msg:错误信息
     ...    timestamp：时间戳
     ...    sign：加密签名
     ${resp}    app_auth_Post    ${app_id}    ${app_key}    timestamp=${timestamp}    sign=${sign}
     Should Be True    ${resp}[code]==-1
+    Should Contain    ${resp}
 
 app_auth_assertDataVerify
     [Arguments]    ${app_id}    ${app_key}    ${timestamp}=None    ${sign}=None
