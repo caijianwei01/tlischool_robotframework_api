@@ -7,8 +7,7 @@ import requests
 
 class AttendanceUtil(object):
 
-    @staticmethod
-    def calculate_sign():
+    def calculate_sign(self):
         """
         获取md5加密签名
         :return: 返回签名
@@ -36,8 +35,7 @@ class AttendanceUtil(object):
         rs = requests.post(url, json=data)
         return rs.json()['data']
 
-    @staticmethod
-    def get_timestamp():
+    def get_timestamp(self):
         """
         获取时间戳
         :return: 返回时间戳
