@@ -72,3 +72,11 @@ add_cookie
         @{cookie_split}    Split String    ${cookie}    =
         Set To Dictionary    ${cookie_dict}    ${cookie_split}[0]=${cookie_split}[1]
     END
+
+get_url_status
+    [Arguments]    ${url}
+    [Documentation]    校验URL地址是否有效
+    ${url_rs}    Remove String    ${url}    "    '
+    Create Session    api    ${url_rs}
+    ${resp}    RequestsLibrary.Get Request    api    ${None}
+    [Return]    ${resp.status_code}

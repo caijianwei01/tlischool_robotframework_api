@@ -28,8 +28,8 @@ class AttendanceUtil(object):
         data = {
             'app_id': '15676497800668552d',
             'app_key': 'E1B559D014E90F7EF8047949A7440F3E',
-            'timestamp': self.get_timestamp(),
-            'sign': self.calculate_sign()
+            'timestamp': self.calculate_sign()[-1],
+            'sign': self.calculate_sign()[0]
         }
         rs = requests.post(url, json=data)
         return rs.json()['data']

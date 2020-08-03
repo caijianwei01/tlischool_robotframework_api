@@ -7,9 +7,9 @@ __all__ = ["URL", "AUTH_PERSON", "CANCEL_AUTH_PERSON", "DEVICE_INTERACTIVE", "AU
            "AUTH_LIST",
            "DEVICE", "UPLOAD_FILE", "TY_CW", "ZF_CW", "WO_CW", "WT_CW", "YSK", "WO_RL", "WT_RL", "SCHOOL_ID",
            "SCHOOL_KEY"]
-URL = "http://attendance.yooticloud.cn/api/v1"
-# URL = "http://attendance.yooticloud.yt/api/v1"
-# URL = "http://192.168.1.25:8081"
+URL = "http://attendance.yooticloud.cn/api/v1/"
+# URL = "http://attendance.yooticloud.yt/api/v1/"
+# URL = "http://192.168.1.25:8081/"
 
 # 设备授权人员
 AUTH_PERSON = "provider/device/auth_person"
@@ -29,6 +29,8 @@ AUTH_LIST = "provider/user_device/auth_list?"
 DEVICE = "provider/device?"
 # 文件上传
 UPLOAD_FILE = "upload_file"
+# 设备授权人员信息查询
+DEVICE_AUTH_PERSON_QUERY = "provider/device/device_auth_person_query"
 
 # TY_智慧校园测温专用
 TY_CW = "1587793700717"

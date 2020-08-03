@@ -26,7 +26,11 @@ Exception_04_获取token时间戳不一致
 Exception_05_获取token签名不一致
     [Tags]    false
     [Template]    app_auth_assertException
-    ${SCHOOL_ID}    ${SCHOOL_KEY}    俩次签名对比失败    ${None}    123
+    ${SCHOOL_ID}    ${SCHOOL_KEY}    俩次签名对比失败    ${None}    a123
+
+DataVerify_06_关键字段校验不为空
+    [Template]    app_auth_assertDataVerify
+    ${SCHOOL_ID}    ${SCHOOL_KEY}
 
 *** Keywords ***
 app_auth_Post
@@ -45,7 +49,6 @@ app_auth_Post
     Set To Dictionary    ${datas}    app_key=${app_key}
     Set To Dictionary    ${datas}    timestamp=${timestamp}
     Set To Dictionary    ${datas}    sign=${sign}
-    Log    ${datas}
     ${resp}    request_post    ${URL}    ${AUTH}    json=${datas}
     Should Be True    ${resp.status_code}==200
     [Return]    ${resp.json()}    # 返回json结果
@@ -80,4 +83,7 @@ app_auth_assertDataVerify
     ...    timestamp：时间戳
     ...    sign：加密签名
     ${resp}    app_auth_Post    ${app_id}    ${app_key}    timestamp=${timestamp}    sign=${sign}
-    Should Be True    ${resp}[code]==-1
+    Should Be True    ${resp}[code]==1
+    #验证关键字段的返回值不能为空
+    Should Not Be Empty    ${resp}[data]
+    Should Not Be Empty    ${resp}[msg]
