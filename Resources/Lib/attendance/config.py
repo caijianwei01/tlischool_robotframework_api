@@ -6,8 +6,8 @@
 __all__ = ["URL", "AUTH_PERSON", "CANCEL_AUTH_PERSON", "DEVICE_INTERACTIVE", "AUTH", "QUERY_USER_INFO", "PROVIDER_USER",
            "AUTH_LIST",
            "DEVICE", "UPLOAD_FILE", "TY_CW", "ZF_CW", "WO_CW", "WT_CW", "YSK", "WO_RL", "WT_RL", "SCHOOL_ID",
-           "SCHOOL_KEY"]
-URL = "http://attendance.yooticloud.cn/api/v1/"
+           "SCHOOL_KEY", "DEVICE_AUTH_PERSON_QUERY"]
+URL = "http://attendance.yooticloud.cn/api/v1"
 # URL = "http://attendance.yooticloud.yt/api/v1/"
 # URL = "http://192.168.1.25:8081/"
 
