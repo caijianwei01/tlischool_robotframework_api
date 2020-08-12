@@ -26,7 +26,7 @@ Exception_04_获取token时间戳不一致
 Exception_05_获取token签名不一致
     [Tags]    false
     [Template]    app_auth_assertException
-    ${SCHOOL_ID}    ${SCHOOL_KEY}    俩次签名对比失败    ${None}    a123
+    ${SCHOOL_ID}    ${SCHOOL_KEY}    俩次签名对比失败    ${None}    "a123"
 
 DataVerify_06_关键字段校验不为空
     [Template]    app_auth_assertDataVerify

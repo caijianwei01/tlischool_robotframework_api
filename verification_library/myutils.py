@@ -201,9 +201,21 @@ class MyUtils(object):
             bs64_str = base64.b64encode(f.read())
         return bs64_str.decode('UTF-8')
 
+    def get_key_code(self, code_num):
+        """
+        返回键盘按键码
+        :param code_num:需要输入的数字
+        :return:
+        """
+        code_num = str(code_num)
+        if re.match("[a-zA-Z]", code_num):
+            code_num = code_num.upper()
+        return ut.KEY_CODE.get(code_num)
+
 
 if __name__ == '__main__':
     mu = MyUtils()
-    print(mu.create_id_card(10))
-    print(mu.create_phone(10))
-    print(mu.create_name(10))
+    pwd = "Tl123456"
+    list_pwd = list(pwd)
+    for i in list_pwd:
+        print(mu.get_key_code(i))
